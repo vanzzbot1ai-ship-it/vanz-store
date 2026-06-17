@@ -19,20 +19,18 @@ if (!fs.existsSync(DATA_FILE)) {
 
 app.use(express.json());
 
+// 1. PETA OTOMATIS KE FOLDER PUBLIC (Untuk menangani index.html, vanz.jpg, dll)
+app.use(express.static(path.join(__dirname, 'public')));
+
 // API untuk mengambil data produk ke halaman web
 app.get('/api/products', (req, res) => {
     const data = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8') || '[]');
     res.json(data);
 });
 
-// Load file utama web
-app.get('public', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-// Membaca file foto profil secara aman jika diakses dari web browser
-app.get('/vanz.jpg', (req, res) => {
-    res.sendFile(path.join(__dirname, 'vanz.jpg'));
+// 2. ROUTE UTAMA (Membaca index.html dari dalam folder public)
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Perintah Bot Telegram
@@ -68,3 +66,4 @@ app.listen(PORT, () => console.log(`🌐 Server Vanzz Store Berjalan Di Port: ${
 
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
+            
