@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vanzz STORE - Official</title>
+    <style>
+        :root { 
+            --neon: #00d4ff; 
+            --bg: #0a0a0c; 
+            --card-bg: rgba(255, 255, 255, 0.03); 
+            --wa-green: #00a884;
+            --wa-dark-bg: #111b21;
+        }
+        body { background: var(--bg); color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; text-align: center; }
+
+        /* Navigation Menu TABS */
+        nav { margin-bottom: 30px; display: flex; justify-content: center; gap: 15px; }
+        nav button { background: rgba(255,255,255,0.02); border: 1px solid var(--neon); color: var(--neon); padding: 10px 25px; cursor: pointer; border-radius: 25px; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 0 5px rgba(0,212,255,0.1); }
+        nav button.active-btn { background: var(--neon); color: #000; box-shadow: 0 0 15px var(--neon); }
+
+        /* Smooth Page Transition Animation */
+        .page { display: none; opacity: 0; transform: translateY(15px); transition: all 0.5s ease-out; }
+        .page.active { display: block; opacity: 1; transform: translateY(0); }
+
+        /* Premium Glassmorphism Card Configuration */
+        .card { background: var(--card-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 25px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.08); margin: 20px auto; width: 90%; max-width: 360px; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        
+        /* Fixed Text Display wrapping using Monospace Layout */
+        .product-text-box { font-family: 'Courier New', Courier, monospace; white-space: pre-wrap; word-break: break-word; color: #e0e0e0; font-size: 0.95em; line-height: 1.5; margin: 15px 0; background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 10px; border-left: 3px solid var(--neon); }
+        
+        /* Auto Action Buttons Group */
+        .btn-group { display: flex; gap: 12px; margin-top: 20px; }
+        .btn { flex: 1; padding: 12px; border-radius: 12px; text-align: center; text-decoration: none; font-weight: bold; font-size: 0.95em; transition: all 0.3s ease; display: inline-block; }
+        .btn-wa { background: #25D366; color: white; box-shadow: 0 4px 10px rgba(37,211,102,0.2); }
+        .btn-tg { background: #0088cc; color: white; box-shadow: 0 4px 10px rgba(0,136,204,0.2); }
+        .btn:hover { transform: translateY(-3px); filter: brightness(1.2); box-shadow: 0 8px 20px rgba(255,255,255,0.1); }
+
+        /* FOTO PROFIL DENGAN FRAME NEON */
+        .pp-container { width: 120px; height: 120px; margin: 0 auto 15px; border-radius: 50%; border: 3px solid var(--neon); overflow: hidden; box-shadow: 0 0 25px rgba(0,212,255,0.3); background: #111; }
+        .pp-container img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .blue-badge { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; background: var(--neon); border-radius: 50%; color: #000; font-size: 10px; font-weight: bold; margin-left: 6px; vertical-align: middle; }
+
+        /* REPLIKA UI WA BUSINESS (ALAMAT & MAPS) */
+        .wa-biz-container { background: var(--wa-dark-bg); border-radius: 16px; padding: 20px; border: 1px solid rgba(255,255,255,0.05); }
+        .wa-header { color: #8696a0; font-size: 0.9em; margin-bottom: 15px; text-align: center; }
+        
+        /* Input Field Box Style (Bisa Diklik) */
+        .wa-link-wrapper { text-decoration: none; color: inherit; display: block; transition: 0.2s; }
+        .wa-link-wrapper:hover { opacity: 0.8; }
+        
+        .wa-input-box { border: 1px solid #8696a0; border-radius: 8px; padding: 12px; margin-bottom: 15px; position: relative; background: transparent; text-align: left; }
+        .wa-input-label { position: absolute; top: -10px; left: 12px; background: var(--wa-dark-bg); color: #8696a0; font-size: 0.75em; padding: 0 4px; }
+        .wa-input-value { color: #e9edef; font-size: 0.95em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        /* REPLIKA MAPS DARI CSS MURNI */
+        .css-map-viewport { width: 100%; height: 200px; background: #e5e3df; border-radius: 12px; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.15); border: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px; cursor: pointer; transition: 0.3s; }
+        .css-map-viewport:hover { filter: brightness(1.05); }
+        .map-road-1 { position: absolute; width: 100%; height: 25px; background: #fff; top: 40px; transform: rotate(-5deg); }
+        .map-road-2 { position: absolute; width: 30px; height: 100%; background: #fff; left: 80px; }
+        .map-road-3 { position: absolute; width: 100%; height: 20px; background: #fff; bottom: 40px; transform: rotate(10deg); }
+        .map-block-1 { position: absolute; width: 60px; height: 40px; background: #c5e1a5; top: 80px; left: 10px; border-radius: 4px; }
+        .map-block-2 { position: absolute; width: 80px; height: 50px; background: #fff59d; top: 80px; right: 10px; border-radius: 4px; }
+        .map-pin { position: absolute; top: 45%; left: 50%; width: 24px; height: 24px; background: #ea4335; border-radius: 50% 50% 50% 0; transform: rotate(-45deg) translate(2px, -14px); box-shadow: -4px 4px 10px rgba(0,0,0,0.3); }
+        .map-pin::after { content: ''; position: absolute; width: 8px; height: 8px; background: #fff; border-radius: 50%; top: 8px; left: 8px; }
+        .map-pin-shadow { position: absolute; top: 52%; left: 49%; width: 12px; height: 4px; background: rgba(0,0,0,0.2); border-radius: 50%; }
+
+        /* LOGO SOSIAL MEDIA CLONE VIA CSS MURNI (Bisa diklik) */
+        .meta-list { margin-top: 20px; font-size: 0.95em; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px; }
+        .meta-item-link { display: flex; align-items: center; gap: 15px; margin-bottom: 12px; color: #8696a0; text-decoration: none; transition: 0.2s; }
+        .meta-item-link:hover span { color: var(--neon); }
+        .meta-item-link span { color: #fff; font-weight: 500; }
+
+        /* Icon Base Custom Dimensions */
+        .icon-css { width: 22px; height: 22px; position: relative; display: inline-block; flex-shrink: 0; }
+        
+        /* Website Globe CSS Icon */
+        .icon-web { border: 2px solid var(--neon); border-radius: 50%; }
+        .icon-web::before { content: ''; position: absolute; width: 100%; height: 6px; border-top: 2px solid var(--neon); border-bottom: 2px solid var(--neon); top: 6px; left: -2px; border-radius: 50%; }
+        
+        /* Instagram CSS Icon */
+        .icon-ig { border: 2px solid #e1306c; border-radius: 6px; }
+        .icon-ig::before { content: ''; position: absolute; width: 8px; height: 8px; border: 2px solid #e1306c; border-radius: 50%; top: 5px; left: 5px; transform: translate(-1px, -1px); }
+        .icon-ig::after { content: ''; position: absolute; width: 2px; height: 2px; background: #e1306c; border-radius: 50%; top: 3px; right: 3px; }
+
+        /* Facebook CSS Icon */
+        .icon-fb { background: #1877f2; border-radius: 4px; }
+        .icon-fb::before { content: 'f'; color: white; font-family: sans-serif; font-weight: bold; font-size: 18px; position: absolute; bottom: -2px; right: 5px; }
+
+        /* Briefcase CSS Icon */
+        .icon-biz { background: #f59e0b; border-radius: 4px; height: 16px; margin-top: 3px; }
+        .icon-biz::before { content: ''; position: absolute; width: 10px; height: 6px; border: 2px solid #f59e0b; border-bottom: none; border-radius: 4px 4px 0 0; top: -6px; left: 4px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <button id="btn-produk" class="active-btn" onclick="showPage('produk')">PRODUK</button>
+        <button id="btn-profil" onclick="showPage('profil')">PROFIL</button>
+    </nav>
+
+    <!-- Halaman Produk (Default Active View) -->
+    <div id="produk" class="page active">
+        <h2 style="color: var(--neon); text-transform: uppercase; letter-spacing: 2px;">Store Catalog</h2>
+        <div id="product-container"></div>
+    </div>
+
+    <!-- Halaman Profil (Business Verified Architecture Layout) -->
+    <div id="profil" class="page">
+        <!-- Foto Profil Menggunakan File Gambar Lokal -->
+        <div class="pp-container">
+            <img src="vanz.jpg" alt="Vanzz Profile">
+        </div>
+        
+        <h1 style="margin: 10px 0 5px;">Vanzz <span class="blue-badge">✔</span></h1>
+        <p style="color: var(--neon); font-weight: bold; margin-top: 0; font-size: 0.9em; letter-spacing: 1px;">DEVELOPER & AUTOMATION SERVICES</p>
+        
+        <div class="card">
+            <div class="wa-biz-container">
+                <div class="wa-header">Beri tahu pelanggan lokasi bisnis atau operasional Anda.</div>
+                
+                <!-- Link Alamat & Map Ketika Diklik -->
+                <a href="https://maps.google.com/?q=Jl.+Jend.+Ahmad+Yani+No.91,+Kesawan,+Kota+Medan" target="_blank" class="wa-link-wrapper">
+                    <!-- Kotak Detail Input Alamat -->
+                    <div class="wa-input-box">
+                        <div class="wa-input-label">Alamat atau wilayah</div>
+                        <div class="wa-input-value">Jl. Jend. Ahmad Yani No.91, Kesawan, Kota Medan</div>
+                    </div>
+
+                    <!-- Replika Elemen Peta Mini Google Maps via CSS -->
+                    <div class="css-map-viewport">
+                        <div class="map-road-1"></div>
+                        <div class="map-road-2"></div>
+                        <div class="map-road-3"></div>
+                        <div class="map-block-1"></div>
+                        <div class="map-block-2"></div>
+                        <div class="map-pin-shadow"></div>
+                        <div class="map-pin"></div>
+                    </div>
+                </a>
+
+                <!-- Identitas Sosmed Menggunakan Logo CSS Murni & Link Aktif -->
+                <div class="meta-list">
+                    <a href="https://vanzzdev.my.id" target="_blank" class="meta-item-link">
+                        <div class="icon-css icon-web"></div>Situs: <span>vanzzdev.my.id</span>
+                    </a>
+                    <a href="https://www.instagram.com/langlangg45?igsh=MW4zcXVsY2FycW5oaw==&utm_source=ig_contact_invite" target="_blank" class="meta-item-link">
+                        <div class="icon-css icon-ig"></div>Instagram: <span>@langlangg</span>
+                    </a>
+                    <a href="https://www.facebook.com/share/1ChHmKKSsA/" target="_blank" class="meta-item-link">
+                        <div class="icon-css icon-fb"></div>Facebook: <span>Vanzz </span>
+                    </a>
+                    <div class="meta-item-link" style="cursor: default; hover: none;">
+                        <div class="icon-css icon-biz"></div>Layanan: <span style="color: #fff;">Web UI, Bot Baileys & Telegraf</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPage(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active-btn'));
+            
+            document.getElementById(id).classList.add('active');
+            document.getElementById('btn-' + id).classList.add('active-btn');
+        }
+
+        // Ambil Data Produk Otomatis dari Express Server
+        async function fetchProducts() {
+            try {
+                const response = await fetch('/api/products');
+                const products = await response.json();
+                const container = document.getElementById('product-container');
+                container.innerHTML = '';
+
+                if(products.length === 0) {
+                    container.innerHTML = '<p style="opacity:0.5; margin-top:40px;">Belum ada produk. Tambahkan lewat bot tele!</p>';
+                    return;
+                }
+
+                products.forEach(p => {
+                    container.innerHTML += `
+                        <div class="card">
+                            <div class="product-text-box">${p.text}</div>
+                            <div class="btn-group">
+                                <a href="https://wa.me/${p.wa}" class="btn btn-wa" target="_blank">WhatsApp</a>
+                                <a href="https://t.me/${p.tg}" class="btn btn-tg" target="_blank">Telegram</a>
+                            </div>
+                        </div>
+                    `;
+                });
+            } catch (err) {
+                console.error("Gagal memuat katalog produk:", err);
+            }
+        }
+
+        fetchProducts();
+    </script>
+</body>
+</html>
