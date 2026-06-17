@@ -26,7 +26,7 @@ app.get('/api/products', (req, res) => {
 });
 
 // Load file utama web
-app.get('/', (req, res) => {
+app.get('public', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
