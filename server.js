@@ -31,8 +31,8 @@ app.get('/', (req, res) => {
 });
 
 // Membaca file foto profil secara aman jika diakses dari web browser
-app.get('/1001011672.jpg', (req, res) => {
-    res.sendFile(path.join(__dirname, '1001011672.jpg'));
+app.get('/vanz.jpg', (req, res) => {
+    res.sendFile(path.join(__dirname, 'vanz.jpg'));
 });
 
 // Perintah Bot Telegram
