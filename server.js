@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 // --- CONFIG UTAMA ---
-const BOT_TOKEN = '7715360708:AAGUnV-UC-PooKtvb5a-C4F4jzRniwV-wsI'; 
+const BOT_TOKEN = '7715360708:AAFfhrSwcBy1kEwrh2WqVqrKzIpdlNyOvdM'; 
 const WA_NUMBER = '62895365156485'; // Nomor WhatsApp toko kamu tanpa spasi / +
 const TG_ADMIN_USERNAME = 'VanzzBan'; // Username Telegram tanpa @
 
