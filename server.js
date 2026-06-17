@@ -20,7 +20,6 @@ if (!fs.existsSync(DATA_FILE)) {
 app.use(express.json());
 
 // 1. PETA OTOMATIS KE FOLDER PUBLIC (Untuk menangani index.html, vanz.jpg, dll)
-app.use(express.static(path.join(__dirname, 'public')));
 
 // API untuk mengambil data produk ke halaman web
 app.get('/api/products', (req, res) => {
@@ -30,7 +29,7 @@ app.get('/api/products', (req, res) => {
 
 // 2. ROUTE UTAMA (Membaca index.html dari dalam folder public)
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Perintah Bot Telegram
